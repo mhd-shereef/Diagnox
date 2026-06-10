@@ -1,0 +1,125 @@
+/* ── SmartForm ── */
+
+.sf-root {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* ── Groups ── */
+.sf-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.sf-group-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-500);
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* ── Grid ── */
+.sf-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+}
+
+@media (min-width: 600px) {
+  .sf-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ── Field ── */
+.sf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.sf-field--toggle {
+  grid-column: span 1;
+}
+
+.sf-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink-400);
+}
+
+.sf-unit {
+  font-size: 0.65rem;
+  color: var(--ink-500);
+  font-style: italic;
+}
+
+.sf-input {
+  padding: 0.6rem 0.75rem !important;
+  font-size: 0.875rem !important;
+}
+
+.sf-hint {
+  font-size: 0.68rem;
+  color: var(--ink-500);
+  line-height: 1.4;
+}
+
+/* ── Toggle ── */
+.sf-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  background: var(--ink-850);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.sf-toggle-label {
+  font-size: 0.8rem;
+  color: var(--ink-300);
+  font-weight: 400;
+}
+
+.sf-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-400);
+  transition: color var(--t-fast);
+  font-family: inherit;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.sf-toggle-btn--on { color: #34d399; }
+.sf-toggle-btn:hover:not(.sf-toggle-btn--on) { color: var(--ink-200); }
+
+/* ── Submit ── */
+.sf-submit {
+  align-self: flex-start;
+  padding: 0.7rem 1.5rem;
+  font-size: 0.9rem;
+}
+
+@keyframes sf-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.sf-spin { animation: sf-spin 0.7s linear infinite; }

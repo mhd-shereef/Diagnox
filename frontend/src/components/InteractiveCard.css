@@ -1,0 +1,20 @@
+.interactive-card {
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+  transform: perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg));
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .interactive-card:hover {
+    box-shadow: var(--shadow-xl);
+    z-index: 10;
+  }
+}
+
+@media (max-width: 768px) {
+  .interactive-card {
+    transform: none !important;
+    transition: none;
+  }
+}

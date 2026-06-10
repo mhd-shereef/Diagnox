@@ -1,8 +1,82 @@
-.app-layout {
+/* ============================================================
+   App Layout — Premium Healthcare Layout
+   ============================================================ */
+
+.app-wrapper {
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
+  position: relative;
+  background: var(--bg-default);
 }
 
-main {
-  flex: 1;
-  padding: 24px;
+/* ── Main Content ── */
+.app-main {
+  flex-grow: 1;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Footer ── */
+.app-footer {
+  background: var(--primary-color);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: var(--space-12) 0;
+  margin-top: auto;
+  position: relative;
+  z-index: 10;
+}
+
+/* Hide footer on admin pages */
+.app-wrapper--admin .app-footer {
+  display: none;
+}
+
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--space-8);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 600;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: -0.01em;
+}
+
+.footer-copy {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-links {
+  display: flex;
+  gap: var(--space-6);
+}
+
+.footer-link {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all var(--t-fast);
+  cursor: pointer;
+}
+
+.footer-link:hover { color: rgba(255, 255, 255, 0.9); }
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 var(--space-6);
+  }
 }

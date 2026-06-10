@@ -1,0 +1,429 @@
+/* ══════════════════════════════════════════════
+   Diagnostics — Premium Model Hub
+   ══════════════════════════════════════════════ */
+
+.diag-root {
+  min-height: calc(100vh - 56px);
+}
+
+/* ── Loading ── */
+.diag-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-20) 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.diag-spinner-ring {
+  width: 36px;
+  height: 36px;
+  border: 2px solid rgba(255,255,255,0.07);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: rotateRing 0.8s linear infinite;
+}
+
+/* ── Page header ── */
+.diag-page-header {
+  margin-bottom: 3rem;
+  max-width: 600px;
+}
+
+.diag-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+}
+
+.diag-page-title {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.diag-page-desc {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+/* ── Offline banner ── */
+.diag-offline-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: rgba(244,63,94,0.06);
+  border: 1px solid rgba(244,63,94,0.18);
+  border-radius: var(--radius-lg);
+  margin-bottom: 2rem;
+  color: var(--ink-200);
+  font-size: 0.875rem;
+}
+
+.diag-offline-banner strong { display: block; color: #fb7185; margin-bottom: 0.25rem; }
+.diag-offline-banner p { margin: 0; }
+.diag-offline-banner code { font-size: 0.85em; color: var(--ink-300); }
+
+/* ── Model hub ── */
+.diag-hub {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .diag-hub { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ── Model card ── */
+.diag-model-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.2s ease;
+  font-family: inherit;
+  padding: 0;
+  width: 100%;
+  box-shadow: var(--shadow-xs);
+}
+
+.diag-model-card:hover {
+  border-color: var(--model-color, var(--border-strong));
+  background: var(--bg-card-hover);
+  box-shadow: var(--shadow-sm);
+}
+
+.diag-model-card:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Thin colored accent at top */
+.diag-model-accent {
+  height: 2px;
+  width: 100%;
+}
+
+.diag-model-card-inner {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 100%;
+}
+
+.diag-model-icon-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.diag-model-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.diag-model-accuracy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.diag-model-title {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+}
+
+.diag-model-subtitle {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.diag-model-desc {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  flex: 1;
+}
+
+.diag-model-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: 0.5rem;
+}
+
+.diag-model-dataset {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.diag-model-arrow {
+  color: var(--text-muted);
+  transition: transform var(--t-fast), color var(--t-fast);
+}
+
+.diag-model-card:hover .diag-model-arrow {
+  transform: translateX(3px);
+  color: var(--text-primary);
+}
+
+/* ── Panel (selected model) ── */
+.diag-panel-header-new {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+}
+
+.diag-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color var(--t-fast);
+  font-family: inherit;
+  padding: 0;
+}
+
+.diag-back-btn:hover { color: var(--text-primary); }
+
+.diag-panel-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.diag-panel-icon-sm {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.diag-panel-title-new {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.diag-panel-dataset {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ── Form surface ── */
+.diag-form-surface {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 720px;
+}
+
+.diag-form-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(42,92,230,0.07);
+  border: 1px solid rgba(42,92,230,0.16);
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.diag-no-schema {
+  padding: 0.75rem 1rem;
+  background: rgba(245,158,11,0.07);
+  border: 1px solid rgba(245,158,11,0.2);
+  border-radius: var(--radius-md);
+  color: #fbbf24;
+  font-size: 0.875rem;
+}
+
+.diag-error-inline {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0.9rem;
+  background: rgba(244,63,94,0.07);
+  border: 1px solid rgba(244,63,94,0.18);
+  border-radius: var(--radius-md);
+  color: #fb7185;
+  font-size: 0.875rem;
+}
+
+/* ── Result panel ── */
+.diag-result-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 640px;
+}
+
+.diag-result-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.diag-result-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #34d399;
+}
+
+.diag-result-reset {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 0.3rem 0.6rem;
+}
+
+.diag-result-body-new {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+}
+
+.diag-result-gauge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  flex-shrink: 0;
+}
+
+.diag-result-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.8rem;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.diag-result-interp { flex: 1; min-width: 180px; }
+
+.diag-result-interp-title {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+}
+
+.diag-result-interp-body {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+
+.diag-result-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.diag-result-features-title {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.2rem;
+}
+
+.diag-feature-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8125rem;
+}
+
+.diag-feature-rank {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--accent-light);
+  min-width: 18px;
+}
+
+.diag-feature-name {
+  color: var(--text-secondary);
+  text-transform: capitalize;
+}
+
+.diag-result-disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  padding: 0.7rem 0.85rem;
+  background: rgba(13, 58, 53, 0.03);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-default);
+}
+
+.diag-result-disclaimer strong { color: var(--text-primary); }

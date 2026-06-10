@@ -96,21 +96,26 @@ class PredictorService:
             preprocessor_dir=preprocessor_dir,
             model_name="framingham",
             features=[
-                "male",
                 "age",
                 "education",
-                "currentSmoker",
                 "cigsPerDay",
-                "BPMeds",
-                "prevalentStroke",
-                "prevalentHyp",
-                "diabetes",
                 "totChol",
                 "sysBP",
                 "diaBP",
                 "BMI",
                 "heartRate",
                 "glucose",
+                "pulsePressure",
+                "cholAgeRatio",
+                "bmiGlucoseInteraction",
+                "smokingAgeInteraction",
+                "sysBpBmiInteraction",
+                "male",
+                "currentSmoker",
+                "BPMeds",
+                "prevalentStroke",
+                "prevalentHyp",
+                "diabetes",
             ],
             positive_label="High Risk",
             negative_label="Low Risk",
@@ -133,11 +138,14 @@ class PredictorService:
         target_preprocessor = preprocessor_dir / f"{model_name}_preprocessor.pkl"
         target_metrics = model_dir / f"{model_name}_metrics.json"
 
-        target_model.write_bytes(source_model.read_bytes())
-        target_preprocessor.write_bytes(source_preprocessor.read_bytes())
-        target_metrics.write_text(source_metrics.read_text(encoding="utf-8"), encoding="utf-8")
+        if source_model.exists():
+            target_model.write_bytes(source_model.read_bytes())
+        if source_preprocessor.exists():
+            target_preprocessor.write_bytes(source_preprocessor.read_bytes())
+        if source_metrics.exists():
+            target_metrics.write_text(source_metrics.read_text(encoding="utf-8"), encoding="utf-8")
 
-        checkpoint = torch.load(target_model, map_location="cpu")
+        checkpoint = torch.load(target_model, map_location="cpu", weights_only=True)
         model = TabularBinaryClassifier(
             input_dim=int(checkpoint["input_dim"]),
             hidden1=int(checkpoint["hidden1"]),
@@ -192,4 +200,10 @@ class PredictorService:
         return self._predict(self.diabetes, payload)
 
     def predict_cardio(self, payload: dict) -> tuple[str, float, list[str]]:
+        # Feature Engineering for Cardio
+        payload["pulsePressure"] = payload["sysBP"] - payload["diaBP"]
+        payload["cholAgeRatio"] = payload["totChol"] / (payload["age"] + 1.0)
+        payload["bmiGlucoseInteraction"] = payload["BMI"] * payload["glucose"]
+        payload["smokingAgeInteraction"] = payload["cigsPerDay"] * payload["age"]
+        payload["sysBpBmiInteraction"] = payload["sysBP"] * payload["BMI"]
         return self._predict(self.cardio, payload)

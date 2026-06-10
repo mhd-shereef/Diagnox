@@ -1,0 +1,531 @@
+/* CancerScreening.css */
+
+.cs-root {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-4);
+}
+
+/* Hub */
+.cs-hub {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  margin-top: var(--space-8);
+}
+
+.cs-hub-header {
+  text-align: center;
+}
+
+.cs-hub-heading {
+  font-size: 2rem;
+  margin-bottom: var(--space-2);
+}
+
+.cs-hub-body {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+.cs-mode-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+@media(min-width: 600px) {
+  .cs-mode-cards {
+    flex-direction: row;
+  }
+}
+
+.cs-mode-card {
+  flex: 1;
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  text-align: left;
+  cursor: pointer;
+  border: 1px solid var(--border-default);
+  transition: transform var(--t-smooth), border-color var(--t-smooth);
+}
+
+.cs-mode-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-strong);
+}
+
+.cs-mode-card-icon {
+  width: 64px;
+  height: 64px;
+  background: rgba(255,255,255,0.05);
+  border-radius: var(--radius-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-subtle);
+}
+
+.cs-mode-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+  color: var(--text-primary);
+}
+
+.cs-mode-card-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+  line-height: 1.5;
+}
+
+.cs-mode-card-badges {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* Mode wrapper */
+.cs-mode-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+}
+
+.cs-mode-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.cs-mode-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Symptom Check */
+.cs-symptom-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.cs-progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.cs-progress-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.cs-progress-fill {
+  height: 100%;
+  background: var(--text-primary);
+  transition: width var(--t-smooth);
+}
+
+.cs-progress-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.cs-question-card {
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.cs-question-label {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.cs-question-hint {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.cs-options {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+.cs-options--two { grid-template-columns: 1fr 1fr; }
+.cs-options--multi { grid-template-columns: 1fr; }
+
+.cs-option {
+  padding: 1rem;
+  font-size: 1.1rem;
+  justify-content: flex-start;
+  background: var(--bg-surface);
+}
+
+.cs-option--selected {
+  background: var(--text-primary);
+  color: var(--ink-900);
+  border-color: var(--text-primary);
+}
+
+.cs-back {
+  align-self: flex-start;
+}
+
+/* Clinical Form */
+.cs-clinical-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.cs-autofill-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-6);
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+.cs-autofill-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 600;
+  color: var(--accent-blue);
+}
+.cs-autofill-actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.cs-steps-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: var(--space-4);
+}
+
+.cs-steps-indicator::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--bg-surface);
+  z-index: 0;
+}
+
+.cs-step-dot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+
+.cs-step-pip {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--bg-surface);
+  border: 2px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  transition: all var(--t-smooth);
+}
+
+.cs-step-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.cs-step-dot--active .cs-step-pip {
+  background: var(--text-primary);
+  border-color: var(--text-primary);
+  color: var(--ink-900);
+}
+.cs-step-dot--active .cs-step-name {
+  color: var(--text-primary);
+}
+
+.cs-step-dot--done .cs-step-pip {
+  background: var(--bg-surface);
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+.cs-step-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.cs-step-main {
+  flex: 1;
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+
+
+.cs-source-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.25rem 0.75rem;
+  background: rgba(13, 58, 53, 0.06);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  align-self: flex-start;
+}
+
+.cs-step-desc {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.cs-field-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-4);
+}
+
+.cs-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.cs-field-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cs-field-unit {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: rgba(13, 58, 53, 0.06);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}
+
+.cs-clinical-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--space-4);
+}
+
+.cs-spin {
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* Results */
+.cs-clinical-result {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-8);
+}
+
+@media(min-width: 600px) {
+  .cs-clinical-result {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.cs-gauge-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  flex-shrink: 0;
+}
+
+.cs-result-badge {
+  padding: 0.35rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.cs-clinical-interpretation {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.cs-interp-title {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.cs-interp-body {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.cs-top-features {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  margin-top: var(--space-2);
+}
+
+.cs-features-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-3);
+}
+
+.cs-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.cs-feature-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 0.95rem;
+}
+
+.cs-feature-rank {
+  font-family: monospace;
+  color: var(--text-muted);
+  background: var(--bg-surface);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}
+
+.cs-feature-name {
+  color: var(--text-primary);
+  text-transform: capitalize;
+}
+
+/* Disclaimer */
+.cs-disclaimer {
+  margin-top: var(--space-8);
+  background: rgba(255,255,255,0.02);
+  border-left: 3px solid var(--border-default);
+  padding: var(--space-4);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+.cs-disclaimer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.cs-disclaimer-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+.cs-disclaimer-icon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.cs-disclaimer-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.cs-disclaimer-body {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ── Radio Button Group (segmented control) ── */
+.cs-radio-group {
+  display: flex;
+  gap: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-default);
+}
+
+.cs-radio-option {
+  flex: 1;
+  padding: 0.85rem 1.25rem;
+  background: var(--bg-surface);
+  border: none;
+  border-right: 1px solid var(--border-default);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--t-fast);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.cs-radio-option:last-child {
+  border-right: none;
+}
+
+.cs-radio-option:hover {
+  background: rgba(13, 58, 53, 0.04);
+  color: var(--text-primary);
+}
+
+.cs-radio-option--selected {
+  background: var(--primary-color);
+  color: var(--bg-default);
+  font-weight: 600;
+}
+
+.cs-radio-option--selected:hover {
+  background: var(--ink-800);
+  color: var(--bg-default);
+}
