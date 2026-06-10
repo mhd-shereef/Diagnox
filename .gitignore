@@ -29,6 +29,5 @@ backend/data/
 Thumbs.db
 
 # Large media files
-frontend/public/cinematic-video.mov
 frontend/public/sequence/frames-source.zip
 *.zip

@@ -128,32 +128,51 @@ def _user_to_public(user: dict) -> dict:
 ADMIN_EMAILS = {"admin@diagnox.ai"}
 
 
-def _seed_admin():
-    """Create default admin account if no admin exists."""
+def _seed_users():
+    """Create default admin and patient accounts if they don't exist."""
     users = _load_users()
-    if any(u.get("role") == "admin" for u in users):
-        return  # Admin already exists
-    admin = {
-        "id": len(users) + 1,
-        "email": "admin@diagnox.ai",
-        "password_hash": _hash_password("admin123"),
-        "name": "System Admin",
-        "role": "admin",
-        "dob": "",
-        "gender": "",
-        "bloodGroup": "",
-        "phone": "",
-        "address": "",
-        "created_at": datetime.utcnow().isoformat(),
-    }
-    users.append(admin)
+    
+    # Seed Admin
+    if not any(u.get("role") == "admin" for u in users):
+        admin = {
+            "id": len(users) + 1,
+            "email": "admin@diagnox.ai",
+            "password_hash": _hash_password("admin123"),
+            "name": "System Admin",
+            "role": "admin",
+            "dob": "",
+            "gender": "",
+            "bloodGroup": "",
+            "phone": "",
+            "address": "",
+            "created_at": datetime.utcnow().isoformat(),
+        }
+        users.append(admin)
+        
+    # Seed Patient Demo
+    if not any(u.get("email") == "test@diagnox.ai" for u in users):
+        patient = {
+            "id": len(users) + 1,
+            "email": "test@diagnox.ai",
+            "password_hash": _hash_password("Test123!"),
+            "name": "Demo Patient",
+            "role": "patient",
+            "dob": "1980-01-01",
+            "gender": "Male",
+            "bloodGroup": "O+",
+            "phone": "555-0199",
+            "address": "123 Health Ave, Medical City",
+            "created_at": datetime.utcnow().isoformat(),
+        }
+        users.append(patient)
+
     _save_users(users)
 
 
 # ── Router ──────────────────────────────────────────────────
 
 def get_router() -> APIRouter:
-    _seed_admin()
+    _seed_users()
     router = APIRouter(prefix="/auth", tags=["auth"])
 
     @router.post("/register", response_model=AuthResponse)
