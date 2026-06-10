@@ -313,7 +313,8 @@ function ClinicalAnalysis({ onResult }) {
       CLINICAL_STEPS.forEach(s => s.fields.forEach(f => {
         payload[f.key] = Number(values[f.key]) || 0;
       }));
-      const res = await axios.post('http://localhost:10000/predict/cancer', payload);
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:10000';
+      const res = await axios.post(`${API_URL}/predict/cancer`, payload);
       onResult(res.data);
     } catch (err) {
       setError(err.response?.data?.detail || err.message || 'Prediction failed.');

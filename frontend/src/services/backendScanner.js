@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { mapEndpoints } from './apiMapper.js';
 
-const DEFAULT_BACKEND_URL = 'http://localhost:10000';
+const DEFAULT_BACKEND_URL = import.meta.env.VITE_API_URL || 'http://localhost:10000';
 
 export const scanBackend = async (url = DEFAULT_BACKEND_URL) => {
   try {

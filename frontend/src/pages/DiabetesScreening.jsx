@@ -291,7 +291,8 @@ function ClinicalAnalysis({ onResult }) {
         payload.Pregnancies = 0;
       }
       
-      const res = await axios.post('http://localhost:10000/predict/diabetes', payload);
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:10000';
+      const res = await axios.post(`${API_URL}/predict/diabetes`, payload);
       onResult(res.data);
     } catch (err) {
       setError(err.response?.data?.detail || err.message || 'Prediction failed.');

@@ -68,7 +68,7 @@ export default function BMITracker() {
   const fetchDietPlan = async (currentBmi, categoryLabel, h, w) => {
     setLoadingDiet(true);
     try {
-      const backendUrl = 'http://localhost:10000/api/chat';
+      const backendUrl = `${import.meta.env.VITE_API_URL || 'http://localhost:10000'}/api/chat`;
 
       const prompt = `You are an expert clinical nutritionist. A patient has a weight of ${w}kg, height of ${h}cm, resulting in a BMI of ${currentBmi} (${categoryLabel}). Provide a very concise, structured JSON response containing personalized diet and lifestyle recommendations. 
 The JSON must have this exact structure: 

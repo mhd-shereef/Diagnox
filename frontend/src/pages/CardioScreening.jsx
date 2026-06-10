@@ -301,7 +301,8 @@ function ClinicalAnalysis({ onResult }) {
       if (payload.currentSmoker === 0) {
         payload.cigsPerDay = 0;
       }
-      const res = await axios.post('http://localhost:10000/predict/cardio', payload);
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:10000';
+      const res = await axios.post(`${API_URL}/predict/cardio`, payload);
       onResult(res.data);
     } catch (err) {
       setError(err.response?.data?.detail || err.message || 'Prediction failed.');

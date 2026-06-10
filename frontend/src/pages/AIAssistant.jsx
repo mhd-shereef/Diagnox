@@ -100,7 +100,7 @@ export default function AIAssistant() {
     setLoading(true);
 
     try {
-      const backendUrl = 'http://localhost:10000/api/chat';
+      const backendUrl = `${import.meta.env.VITE_API_URL || 'http://localhost:10000'}/api/chat`;
 
       const response = await fetch(backendUrl, {
         method: 'POST',
